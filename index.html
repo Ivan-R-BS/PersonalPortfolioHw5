@@ -42,44 +42,32 @@
       </ol>
       <article>
         <h2>Projects</h2>
-        <section>
-          
-        <h3>Progammed Line Follower</h3>
-        <p>
-          Worked on getting an <dfn><strong><em>arduino-based car</em></strong></dfn> was moving with the arduino chip as the one controlling it,
-          using sensors and programming. Helped me get better at <em> <strong> SolidWorks</strong></em> and <em> <strong>Arduino-based Coding </strong></em>
-        </p>
-        <figure>
-          <picture><img
-            src="images/arduinocar.webp"
-            alt="Arduino based 3d Printed car chassis"
-          ></picture>
-          
-          <figcaption>Line Follower</figcaption>
-        </figure>
-
-        <aside>
-          <cite>https://images.app.goo.gl/RDU1yG8s1oGdPDcS8</cite>
-        </aside>
-        </section>
-        <section>
-          <h3>Website</h3>
-          <p>Worked on a team to make a react based website which allowed users to connect to their spotify and listen to music and share what they were listening to to their friends with a pomodoro timer and task management. Was very helpful in getting better adjusted to using git for version control as well as <em>Typescript </em> and <em> react</em>.</p>
-         <figure><video controls style="width:80%" >
-          <source src="/video/react.mp4" type="video/mp4" >
-
-          Download the
-          <a href="/video/react.mp4">MP4</a>
-          video.
-        </video> <figcaption>Demo of website</figcaption></figure> 
-        </section>
-        <section>
-          <h3>Mini-Computer in VHDL</h3>
-          <p>Using <em> <strong> VHDL</strong></em> created a mini computer capable of doing basic commands like add subrtract bitshifts etc. 
-            Was in depth because needed to be able to take in assembly instructions as bits and map it all out to work correctly. Really helped my use of logic and better understand assembly and Hardware</p>
-          <figure><img src="images/rtl-wave.png" alt="RTL schematic and input output waveform view"><figcaption>RTL schematic and input output waveform view</figcaption></figure>
-          <aside><cite>https://www.researchgate.net/publication/375159178/figure/fig2/AS:11431281202429779@1698851768598/Figure-A1-Eight-bit-binary-rate-multiplier-a-RTL-diagram-obtained-by-compiling-the.png</cite></aside>
-        </section>
+        <project-card 
+        title="Programmed Line Follower" 
+        image="images/arduinocar.webp" 
+        alt="Arduino based 3D Printed car chassis" 
+        description="Worked on getting an arduino-based car moving with the Arduino chip as the controller, using sensors and programming. Helped me get better at SolidWorks and Arduino-based Coding." 
+        link="https://images.app.goo.gl/RDU1yG8s1oGdPDcS8" 
+        link-text="View Source img">
+      </project-card>
+      
+      <project-card 
+        title="React Website" 
+        image="images/ss.png" 
+        alt="Screenshot of React website with Spotify integration" 
+        description="Worked on a team to make a React-based website which allowed users to connect to their Spotify and listen to music and share what they were listening to with friends, featuring a pomodoro timer and task management." 
+        link="video/react.mp4" 
+        link-text="Watch Demo">
+      </project-card>
+      
+      <project-card 
+        title="Mini-Computer in VHDL" 
+        image="images/rtl-wave.png" 
+        alt="RTL schematic and input output waveform view" 
+        description="Using VHDL, created a mini computer capable of performing basic commands like add, subtract, bitshifts etc. Helped me better understand assembly and hardware design." 
+        link="https://www.researchgate.net/publication/375159178/figure/fig2/AS:11431281202429779@1698851768598/Figure-A1-Eight-bit-binary-rate-multiplier-a-RTL-diagram-obtained-by-compiling-the.png" 
+        link-text="View Source img">
+      </project-card>
 
         
       </article>
@@ -93,5 +81,6 @@
         <p> by Ivan Binet Sanchez </p>
       </div>
     </footer>
+    <script src="project-card.js"></script>
   </body>
 </html>
