@@ -299,15 +299,35 @@ input:user-invalid {
     order: -1;
   }
 }
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+
+.load-buttons {
+  display: flex;
+  flex-wrap: wrap;
   gap: var(--spacing-unit);
-  width: 100%;
+  margin-bottom: var(--spacing-unit);
 }
 
-@media (max-width: 768px) {
-  .projects-grid {
-    grid-template-columns: 1fr;
-  }
+.load-buttons button {
+  background-color: var(--nav-bg);
+  color: var(--nav-text);
+  border: none;
+  padding: 0.5em 1em;
+  border-radius: 0.25em;
+  cursor: pointer;
+  font-family: "Montserrat", system-ui, sans-serif;
+  font-size: var(--base-font-size);
+  transition: background-color var(--transition-speed) ease,
+              transform var(--transition-speed) ease,
+              box-shadow var(--transition-speed) ease;
+}
+
+.load-buttons button:hover {
+  background-color: var(--hover-bg);
+  transform: var(--hover-transform);
+  box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.2);
+}
+
+.load-buttons button:focus {
+  outline: 2px solid var(--link-color);
+  outline-offset: 2px;
 }
