@@ -40,34 +40,19 @@
         <li>Experienced with Python Machine Learning and VHDL</li>
         <li>Experienced with SolidWorks and Eaglecad</li>
       </ol>
+      <div class="load-buttons">
+        <button id="load-local">Load Local</button>
+        <button id="load-remote">Load Remote</button>
+      </div>
       <article>
         <h2>Projects</h2>
-        <project-card 
-        title="Programmed Line Follower" 
-        image="images/arduinocar.webp" 
-        alt="Arduino based 3D Printed car chassis" 
-        description="Worked on getting an arduino-based car moving with the Arduino chip as the controller, using sensors and programming. Helped me get better at SolidWorks and Arduino-based Coding." 
-        link="https://images.app.goo.gl/RDU1yG8s1oGdPDcS8" 
-        link-text="View Source img">
-      </project-card>
-      
-      <project-card 
-        title="React Website" 
-        image="images/ss.png" 
-        alt="Screenshot of React website with Spotify integration" 
-        description="Worked on a team to make a React-based website which allowed users to connect to their Spotify and listen to music and share what they were listening to with friends, featuring a pomodoro timer and task management." 
-        link="video/react.mp4" 
-        link-text="Watch Demo" is-even>
-      </project-card>
-      
-      <project-card 
-        title="Mini-Computer in VHDL" 
-        image="images/rtl-wave.png" 
-        alt="RTL schematic and input output waveform view" 
-        description="Using VHDL, created a mini computer capable of performing basic commands like add, subtract, bitshifts etc. Helped me better understand assembly and hardware design." 
-        link="https://www.researchgate.net/publication/375159178/figure/fig2/AS:11431281202429779@1698851768598/Figure-A1-Eight-bit-binary-rate-multiplier-a-RTL-diagram-obtained-by-compiling-the.png" 
-        link-text="View Source img">
-      </project-card>
+
+        <div id="projects-container" class="projects-grid">
+          <project-card>...</project-card>
+          <project-card>...</project-card>
+          <project-card>...</project-card>
+  
+        </div>
 
         
       </article>
@@ -82,5 +67,6 @@
       </div>
     </footer>
     <script src="project-card.js"></script>
+    <script src="load-data.js"></script>
   </body>
 </html>
