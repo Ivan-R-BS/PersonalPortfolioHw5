@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 - Page Not Found</title>
+  <link rel="icon" type="image/x-icon" href="images/favicon.ico" >
+  <link rel="stylesheet" href="mystyle.css">
+  <style>
+    :root {
+      --primary-color: #003135;
+      --header-bg: #024950;
+      --nav-bg: #3c698a;
+      --nav-text: #f9f9f9;
+      --hover-bg: #e42e00;
+      --footer-text: yellow;
+      --link-color: #afdde5;
+      --section-even-bg: #004850;
+      --section-odd-bg: #002530;
+      --section-padding: clamp(2rem, 4vw, 4rem);
+      --spacing-unit: clamp(0.5rem, 2vw, 1.5rem);
+      --container-padding: max(1rem, 5%);
+      --base-font-size: clamp(1rem, 2vw, 1.25rem);
+      --h1-font-size: clamp(1.5rem, 4vw, 2.5rem);
+      --transition-speed: 0.3s;
+      --hover-transform: translateY(-0.25rem);
+    }
+
+    body {
+      margin: 0;
+      font-family: "Montserrat", system-ui, sans-serif;
+      background-color: var(--primary-color);
+      color: var(--nav-text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background-color: var(--header-bg);
+      padding: var(--spacing-unit);
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: var(--h1-font-size);
+      font-family: "Roboto", Arial, sans-serif;
+    }
+
+    .error-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: var(--section-padding);
+      text-align: center;
+      background-color: var(--section-odd-bg);
+    }
+
+    .error-code {
+      font-size: 8rem;
+      color: var(--hover-bg);
+      margin: 0;
+      line-height: 1;
+      animation: pulse 2s infinite;
+    }
+
+    .error-message {
+      font-size: 2rem;
+      margin: 1rem 0 2rem;
+      color: var(--link-color);
+    }
+
+    #game-container {
+      width: 100%;
+      max-width: 600px;
+      margin: 1.5rem auto;
+    }
+
+    #game {
+      position: relative;
+      width: 100%;
+      height: 200px;
+      background: var(--section-even-bg);
+      border: 2px solid var(--link-color);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+
+    #dino {
+      position: absolute;
+      bottom: 0;
+      left: 50px;
+      width: 40px;
+      height: 40px;
+      background-color: var(--link-color);
+      border-radius: 5px;
+      transition: bottom 0.1s;
+    }
+
+
+    #obstacle {
+      position: absolute;
+      bottom: 0;
+      left: 600px;
+      width: 30px;
+      height: 50px;
+      background-color: var(--hover-bg);
+      border-radius: 5px;
+    }
+
+
+    #game-info {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      color: var(--link-color);
+    }
+
+    #game-over {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      color: var(--link-color);
+      text-align: center;
+      z-index: 10;
+    }
+
+    #restart-btn {
+      background-color: var(--nav-bg);
+      color: var(--nav-text);
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      margin-top: 10px;
+      cursor: pointer;
+      transition: background-color var(--transition-speed) ease;
+    }
+
+    #restart-btn:hover {
+      background-color: var(--hover-bg);
+    }
+
+    #jump-instructions {
+      margin-top: 10px;
+      color: var(--link-color);
+      font-style: italic;
+    }
+
+    .back-button {
+      display: inline-block;
+      background-color: var(--nav-bg);
+      color: var(--nav-text);
+      text-decoration: none;
+      padding: 0.5em 1em;
+      border-radius: 0.25em;
+      margin-top: 1.5rem;
+      transition: transform var(--transition-speed) ease, 
+                  background-color var(--transition-speed) ease,
+                  box-shadow var(--transition-speed) ease;
+    }
+
+    .back-button:hover {
+      background-color: var(--hover-bg);
+      transform: var(--hover-transform);
+      box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.2);
+    }
+
+    footer {
+      background-color: var(--primary-color);
+      padding: var(--spacing-unit);
+      text-align: center;
+      color: var(--footer-text);
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+
+    .cloud {
+      position: absolute;
+      background-color: rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+    }
+
+    .ground {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 2px;
+      background-color: var(--link-color);
+    }
+
+
+    @media (max-width: 768px) {
+      #game-container {
+        max-width: 100%;
+        padding: 0 1rem;
+      }
+      
+      .error-code {
+        font-size: 5rem;
+      }
+      
+      .error-message {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>404 - Page Not Found</h1>
+  </header>
+
+  <div class="error-container">
+    <h2 class="error-message">Oops! This page doesn't exist</h2>
+    <p>But while you're here, enjoy a quick game!</p>
+    
+    <div id="game-container">
+      <div id="game-info">
+        <div id="score">Score: 0</div>
+        <div id="high-score">High Score: 0</div>
+      </div>
+      
+      <div id="game">
+        <div class="ground"></div>
+        <div id="dino"></div>
+        <div id="obstacle"></div>
+        <div id="game-over">
+          <h3>Game Over!</h3>
+          <p>Your score: <span id="final-score">0</span></p>
+          <button id="restart-btn">Play Again</button>
+        </div>
+      </div>
+      
+      <div id="jump-instructions">Press Space or Up Arrow to jump, or tap the game area on mobile</div>
+    </div>
+    
+    <a href="index.html" class="back-button">Back to Homepage</a>
+  </div>
+
+  <footer>
+    <p>&copy; 2023 Your Name - All Rights Reserved</p>
+  </footer>
+
+  <script>
+
+    const dino = document.getElementById('dino');
+    const obstacle = document.getElementById('obstacle');
+    const gameOverScreen = document.getElementById('game-over');
+    const scoreDisplay = document.getElementById('score');
+    const highScoreDisplay = document.getElementById('high-score');
+    const finalScoreDisplay = document.getElementById('final-score');
+    const restartBtn = document.getElementById('restart-btn');
+    const game = document.getElementById('game');
+    
+
+    let isJumping = false;
+    let isGameOver = false;
+    let jumpHeight = 0;
+    let obstacleLeft = 600;
+    let score = 0;
+    let highScore = localStorage.getItem('dinoHighScore') || 0;
+    let obstacleSpeed = 5;
+    let gameInterval;
+    let scoreInterval;
+    
+
+    highScoreDisplay.textContent = `High Score: ${highScore}`;
+    
+
+    function createClouds() {
+      for (let i = 0; i < 3; i++) {
+        const cloud = document.createElement('div');
+        cloud.classList.add('cloud');
+        cloud.style.left = `${Math.random() * 550}px`;
+        cloud.style.top = `${20 + Math.random() * 60}px`;
+        cloud.style.width = `${30 + Math.random() * 40}px`;
+        cloud.style.height = `${20 + Math.random() * 30}px`;
+        cloud.style.opacity = `${0.5 + Math.random() * 0.5}`;
+        game.appendChild(cloud);
+      }
+    }
+    
+    createClouds();
+    
+
+    function jump() {
+      if (isJumping || isGameOver) return;
+      
+      isJumping = true;
+      
+
+      let upInterval = setInterval(() => {
+        if (jumpHeight >= 100) {
+          clearInterval(upInterval);
+          
+
+          let downInterval = setInterval(() => {
+            if (jumpHeight <= 0) {
+              clearInterval(downInterval);
+              isJumping = false;
+              jumpHeight = 0;
+            } else {
+              jumpHeight -= 5;
+              dino.style.bottom = jumpHeight + 'px';
+            }
+          }, 20);
+        } else {
+          jumpHeight += 10;
+          dino.style.bottom = jumpHeight + 'px';
+        }
+      }, 20);
+    }
+    
+
+    function checkCollision() {
+      const dinoRect = dino.getBoundingClientRect();
+      const obstacleRect = obstacle.getBoundingClientRect();
+      
+      return (
+        dinoRect.right > obstacleRect.left &&
+        dinoRect.left < obstacleRect.right &&
+        dinoRect.bottom > obstacleRect.top &&
+        dinoRect.top < obstacleRect.bottom
+      );
+    }
+    
+    
+    function gameOver() {
+      isGameOver = true;
+      clearInterval(gameInterval);
+      clearInterval(scoreInterval);
+      
+      finalScoreDisplay.textContent = score;
+      gameOverScreen.style.display = 'block';
+      
+
+      if (score > highScore) {
+        highScore = score;
+        localStorage.setItem('dinoHighScore', highScore);
+        highScoreDisplay.textContent = `High Score: ${highScore}`;
+      }
+    }
+    
+
+    function updateGame() {
+      if (isGameOver) return;
+      
+
+      obstacleLeft -= obstacleSpeed;
+      obstacle.style.left = obstacleLeft + 'px';
+      
+
+      if (score > 0 && score % 200 === 0) {
+        obstacleSpeed += 0.2;
+      }
+      
+
+      if (obstacleLeft < -30) {
+        obstacleLeft = 600 + Math.random() * 300;
+        obstacle.style.left = obstacleLeft + 'px';
+      }
+      
+
+      if (checkCollision()) {
+        gameOver();
+      }
+    }
+    
+
+    function startGame() {
+      isGameOver = false;
+      score = 0;
+      obstacleLeft = 600;
+      obstacleSpeed = 5;
+      jumpHeight = 0;
+      
+      scoreDisplay.textContent = `Score: ${score}`;
+      gameOverScreen.style.display = 'none';
+      dino.style.bottom = '0px';
+      obstacle.style.left = '600px';
+      
+
+      clearInterval(gameInterval);
+      clearInterval(scoreInterval);
+      
+
+      gameInterval = setInterval(updateGame, 20);
+      scoreInterval = setInterval(() => {
+        score += 1;
+        scoreDisplay.textContent = `Score: ${score}`;
+      }, 100);
+    }
+    
+
+    document.addEventListener('keydown', (event) => {
+      if ((event.code === 'Space' || event.code === 'ArrowUp') && !isGameOver) {
+        jump();
+      }
+    });
+    
+    game.addEventListener('click', () => {
+      if (!isGameOver) {
+        jump();
+      }
+    });
+    
+    game.addEventListener('touchstart', (event) => {
+      if (!isGameOver) {
+        event.preventDefault();
+        jump();
+      }
+    });
+    
+    restartBtn.addEventListener('click', startGame);
+    
+
+    startGame();
+  </script>
+</body>
+</html>
